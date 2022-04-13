@@ -2,6 +2,8 @@
 # https://yunaaaas.tistory.com/36
 
 import sys, heapq
+from queue import PriorityQueue
+
 sys.stdin = open("input.txt")
 input = sys.stdin.readline
 
