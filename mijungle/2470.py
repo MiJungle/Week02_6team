@@ -1,3 +1,8 @@
+#소스: https://bladejun.tistory.com/97
+#two pointer로 가면 O(n)
+
+
+
 import sys
 sys.stdin = open("input.txt")
 input = sys.stdin.readline
@@ -8,24 +13,22 @@ M.sort()
 
 def closetozero():
     first = 0
-    end = len(M) - 1
-    count = []
-    while first <= end:
-        mid = (first + end)//2
-        for i in M:
-            k = abs(i + M[mid])
-            if i != M[mid]:
-                count.append([k, i, M[mid]])
-                first = mid +1 
-    print(count)
-    for i in count:
-        if i[0] == 0:
-            ans = i[1:]
-            print(*ans, sep = ' ')
-            break
-        else:
-            ans = min(count)[1:]
-            print(*ans, sep = ' ')
-            break
+    end = N-1
+    answer = 2e+9+1 #2,000,000,001
+    final = [] ##
+    while first < end:
+        M_first = M[first]
+        M_end = M[end]
 
-closetozero()
+        total = M_first + M_end
+
+        if abs(total) < answer:
+            answer = abs(total)
+            final = [M_first, M_end]
+
+        if total < 0:
+            first += 1
+        else:
+            end -= 1
+    return final[0], final[1]
+print(*closetozero(), sep=" ")
